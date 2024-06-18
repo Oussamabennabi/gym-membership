@@ -72,3 +72,69 @@ model VerificationToken {
 
     @@unique([identifier, token])
 }
+
+
+model Member {
+  id          Int          @id @default(autoincrement())
+  email       String       @unique
+  password    String
+  firstName   String
+  lastName    String
+  memberships Membership[]
+  payments    Payment[]
+  statistics  Statistic[]
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+}
+
+model Membership {
+  id        Int       @id @default(autoincrement())
+  type      String
+  price     Float
+  startDate DateTime
+  endDate   DateTime
+  memberId  Int
+  member    Member    @relation(fields: [memberId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Payment {
+  id        Int       @id @default(autoincrement())
+  amount    Float
+  date      DateTime  @default(now())
+  memberId  Int
+  member    Member    @relation(fields: [memberId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Statistic {
+  id        Int       @id @default(autoincrement())
+  type      String
+  value     Float
+  date      DateTime  @default(now())
+  memberId  Int
+  member    Member    @relation(fields: [memberId], references: [id])
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Equipment {
+  id        Int       @id @default(autoincrement())
+  name      String
+  type      String
+  quantity  Int
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Facility {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  openingTime DateTime
+  closingTime DateTime
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
