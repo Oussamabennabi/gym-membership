@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import  Link  from 'next/link'
 import { IconChevronDown } from '@tabler/icons-react'
 import { Button, buttonVariants } from './custom/button'
 import {
@@ -20,9 +20,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from './ui/tooltip'
-import { cn } from '@/lib/utils'
-import useCheckActiveNav from '@/hooks/use-check-active-nav'
-import { SideLink } from '@/data/sidelinks'
+import { cn } from '~/lib/utils'
+import useCheckActiveNav from '~/hooks/use-check-active-nav'
+import type { SideLink } from '~/data/sidelinks'
 
 interface NavProps extends React.HTMLAttributes<HTMLDivElement> {
   isCollapsed: boolean
@@ -91,7 +91,7 @@ function NavLink({
   const { checkActiveNav } = useCheckActiveNav()
   return (
     <Link
-      to={href}
+      href={href}
       onClick={closeNav}
       className={cn(
         buttonVariants({
@@ -163,7 +163,7 @@ function NavLinkIcon({ title, icon, label, href }: NavLinkProps) {
     <Tooltip delayDuration={0}>
       <TooltipTrigger asChild>
         <Link
-          to={href}
+          href={href}
           className={cn(
             buttonVariants({
               variant: checkActiveNav(href) ? 'secondary' : 'ghost',
@@ -226,7 +226,7 @@ function NavLinkIconDropdown({ title, icon, label, sub }: NavLinkProps) {
         {sub!.map(({ title, icon, label, href }) => (
           <DropdownMenuItem key={`${title}-${href}`} asChild>
             <Link
-              to={href}
+              href={href}
               className={`${checkActiveNav(href) ? 'bg-secondary' : ''}`}
             >
               {icon} <span className='ml-2 max-w-52 text-wrap'>{title}</span>

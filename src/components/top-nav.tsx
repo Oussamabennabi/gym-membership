@@ -1,13 +1,13 @@
-import { cn } from '@/lib/utils'
-import { Link } from 'react-router-dom'
+import { cn } from '~/lib/utils'
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '~/components/ui/dropdown-menu'
 import { Button } from './custom/button'
 import { IconMenu } from '@tabler/icons-react'
+import Link from 'next/link'
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
@@ -31,7 +31,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             {links.map(({ title, href, isActive }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
                 <Link
-                  to={href}
+                  href={href}
                   className={!isActive ? 'text-muted-foreground' : ''}
                 >
                   {title}
@@ -52,7 +52,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
         {links.map(({ title, href, isActive }) => (
           <Link
             key={`${title}-${href}`}
-            to={href}
+            href={href}
             className={`text-sm font-medium transition-colors hover:text-primary ${isActive ? '' : 'text-muted-foreground'}`}
           >
             {title}

@@ -3,10 +3,9 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import useIsCollapsed from "~/hooks/use-is-collapsed";
-import Sidebar2 from "~/components/sidebar";
 import { ThemeProvider } from "~/components/theme-provider";
 import { Toaster } from "~/components/ui/toaster";
+import LayoutWrapper from "~/components/layout-wrapper";
 
 export const metadata = {
   title: "Create T3 App",
@@ -19,7 +18,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [isCollapsed, setIsCollapsed] = useIsCollapsed()
 
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
@@ -27,18 +25,7 @@ export default function RootLayout({
       <ThemeProvider defaultTheme='dark' storageKey='gym-guard'>
         <TRPCReactProvider>
 
-          <div className="relative h-full overflow-hidden bg-background">
-            <Sidebar2
-              isCollapsed={isCollapsed}
-              setIsCollapsed={setIsCollapsed}
-            />
-            <main
-              id="content"
-              className={`overflow-x-hidden pt-16 transition-[margin] md:overflow-y-hidden md:pt-0 ${isCollapsed ? "md:ml-14" : "md:ml-64"} h-full`}
-            >
-              {children}
-            </main>
-          </div>
+          <LayoutWrapper>{children}</LayoutWrapper>
           <Toaster/>
         </TRPCReactProvider>
      </ThemeProvider>

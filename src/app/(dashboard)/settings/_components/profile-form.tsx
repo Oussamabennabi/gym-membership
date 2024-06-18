@@ -1,7 +1,7 @@
+"use client"
 import { z } from 'zod'
-import { Link } from 'react-router-dom'
 import { useFieldArray, useForm } from 'react-hook-form'
-import { Button } from '@/components/custom/button'
+import { Button } from '~/components/custom/button'
 import {
   Form,
   FormControl,
@@ -10,19 +10,20 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/components/ui/form'
-import { Input } from '@/components/ui/input'
+} from '~/components/ui/form'
+import { Input } from '~/components/ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { toast } from '@/components/ui/use-toast'
-import { cn } from '@/lib/utils'
+} from '~/components/ui/select'
+import { Textarea } from '~/components/ui/textarea'
+import { toast } from '~/components/ui/use-toast'
+import { cn } from '~/lib/utils'
 import { zodResolver } from '@hookform/resolvers/zod'
+import Link from 'next/link'
 
 const profileFormSchema = z.object({
   username: z
@@ -122,7 +123,7 @@ export default function ProfileForm() {
               </Select>
               <FormDescription>
                 You can manage verified email addresses in your{' '}
-                <Link to='/examples/forms'>email settings</Link>.
+                <Link href='/examples/forms'>email settings</Link>.
               </FormDescription>
               <FormMessage />
             </FormItem>

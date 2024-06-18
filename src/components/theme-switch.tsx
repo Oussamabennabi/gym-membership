@@ -1,3 +1,5 @@
+"use client"
+
 import { IconMoon, IconSun } from '@tabler/icons-react'
 import { useTheme } from './theme-provider'
 import { Button } from './custom/button'

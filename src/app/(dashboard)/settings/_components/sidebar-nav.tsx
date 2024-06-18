@@ -1,14 +1,15 @@
+"use client"
+import Link from 'next/link'
 import { useState } from 'react'
-import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { buttonVariants } from '@/components/custom/button'
+import { buttonVariants } from '~/components/custom/button'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select'
-import { cn } from '@/lib/utils'
+} from '~/components/ui/select'
+import { cn } from '~/lib/utils'
 
 interface SidebarNavProps extends React.HTMLAttributes<HTMLElement> {
   items: {
@@ -23,13 +24,14 @@ export default function SidebarNav({
   items,
   ...props
 }: SidebarNavProps) {
-  const { pathname } = useLocation()
-  const navigate = useNavigate()
-  const [val, setVal] = useState(pathname ?? '/settings')
+  // const { pathname } = useLocation()
+  // const navigate = useNavigate()
+  // const [val, setVal] = useState(pathname ?? '/settings')
+  const [val, setVal] = useState( '/settings')
 
   const handleSelect = (e: string) => {
     setVal(e)
-    navigate(e)
+    // navigate(e)
   }
 
   return (
@@ -63,10 +65,10 @@ export default function SidebarNav({
           {items.map((item) => (
             <Link
               key={item.href}
-              to={item.href}
+              href={item.href}
               className={cn(
                 buttonVariants({ variant: 'ghost' }),
-                pathname === item.href
+                item.href
                   ? 'bg-muted hover:bg-muted'
                   : 'hover:bg-transparent hover:underline',
                 'justify-start'
